@@ -50,7 +50,7 @@
             this.radioButtonMale = new System.Windows.Forms.RadioButton();
             this.radioButtonFemale = new System.Windows.Forms.RadioButton();
             this.dateTimePickerDOB = new System.Windows.Forms.DateTimePicker();
-            this.txtSemester = new System.Windows.Forms.ComboBox();
+            this.txtYear = new System.Windows.Forms.ComboBox();
             this.txtProgramming = new System.Windows.Forms.ComboBox();
             this.txtDuration = new System.Windows.Forms.ComboBox();
             this.txtAddress = new System.Windows.Forms.RichTextBox();
@@ -63,10 +63,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(48, 115);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(22, 112);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(148, 24);
+            this.label1.Size = new System.Drawing.Size(192, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "Registration No :";
             // 
@@ -124,11 +124,11 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Palatino Linotype", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(765, 189);
+            this.label7.Location = new System.Drawing.Point(765, 179);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(114, 32);
+            this.label7.Size = new System.Drawing.Size(61, 32);
             this.label7.TabIndex = 6;
-            this.label7.Text = "Semester";
+            this.label7.Text = "Year";
             // 
             // label8
             // 
@@ -136,9 +136,9 @@
             this.label8.Font = new System.Drawing.Font("Palatino Linotype", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(765, 240);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(162, 32);
+            this.label8.Size = new System.Drawing.Size(92, 32);
             this.label8.TabIndex = 7;
-            this.label8.Text = "Programming";
+            this.label8.Text = "Branch";
             // 
             // label9
             // 
@@ -174,7 +174,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Palatino Linotype", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(72, 454);
+            this.label12.Location = new System.Drawing.Point(72, 458);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(111, 32);
             this.label12.TabIndex = 11;
@@ -271,38 +271,30 @@
             this.dateTimePickerDOB.Size = new System.Drawing.Size(289, 28);
             this.dateTimePickerDOB.TabIndex = 20;
             // 
-            // txtSemester
+            // txtYear
             // 
-            this.txtSemester.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSemester.FormattingEnabled = true;
-            this.txtSemester.Items.AddRange(new object[] {
-            "1st sem",
-            "2nd sem",
-            "3rd sem",
-            "4th sem",
-            "5th sem",
-            "6th sem",
-            "7th sem",
-            "8th sem"});
-            this.txtSemester.Location = new System.Drawing.Point(957, 179);
-            this.txtSemester.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtSemester.Name = "txtSemester";
-            this.txtSemester.Size = new System.Drawing.Size(289, 30);
-            this.txtSemester.TabIndex = 21;
-            this.txtSemester.Text = "--Select--";
+            this.txtYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtYear.FormattingEnabled = true;
+            this.txtYear.Items.AddRange(new object[] {
+            "1st Year",
+            "2nd Year",
+            "3rd Year"});
+            this.txtYear.Location = new System.Drawing.Point(957, 179);
+            this.txtYear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtYear.Name = "txtYear";
+            this.txtYear.Size = new System.Drawing.Size(289, 30);
+            this.txtYear.TabIndex = 21;
+            this.txtYear.Text = "--Select--";
             // 
             // txtProgramming
             // 
             this.txtProgramming.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtProgramming.FormattingEnabled = true;
             this.txtProgramming.Items.AddRange(new object[] {
-            "C Programming",
-            "C ++",
-            "Java",
-            "JSP",
-            "C# (C Sharp)",
-            "Python",
-            "PHP"});
+            "Computer",
+            "Civil ",
+            "Electrical",
+            "Mechanical"});
             this.txtProgramming.Location = new System.Drawing.Point(957, 242);
             this.txtProgramming.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtProgramming.Name = "txtProgramming";
@@ -315,8 +307,9 @@
             this.txtDuration.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDuration.FormattingEnabled = true;
             this.txtDuration.Items.AddRange(new object[] {
-            "2020-2024",
-            "2024-2028"});
+            "2024-2025",
+            "2025-2026",
+            "2026-2027"});
             this.txtDuration.Location = new System.Drawing.Point(957, 354);
             this.txtDuration.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtDuration.Name = "txtDuration";
@@ -361,13 +354,14 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.Crimson;
-            this.label13.Location = new System.Drawing.Point(209, 115);
+            this.label13.Location = new System.Drawing.Point(208, 112);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(82, 25);
+            this.label13.Size = new System.Drawing.Size(99, 29);
             this.label13.TabIndex = 27;
             this.label13.Text = "label13";
+            this.label13.Click += new System.EventHandler(this.label13_Click);
             // 
             // New_Admission
             // 
@@ -381,7 +375,7 @@
             this.Controls.Add(this.txtAddress);
             this.Controls.Add(this.txtDuration);
             this.Controls.Add(this.txtProgramming);
-            this.Controls.Add(this.txtSemester);
+            this.Controls.Add(this.txtYear);
             this.Controls.Add(this.dateTimePickerDOB);
             this.Controls.Add(this.radioButtonFemale);
             this.Controls.Add(this.radioButtonMale);
@@ -437,7 +431,7 @@
         private System.Windows.Forms.RadioButton radioButtonMale;
         private System.Windows.Forms.RadioButton radioButtonFemale;
         private System.Windows.Forms.DateTimePicker dateTimePickerDOB;
-        private System.Windows.Forms.ComboBox txtSemester;
+        private System.Windows.Forms.ComboBox txtYear;
         private System.Windows.Forms.ComboBox txtProgramming;
         private System.Windows.Forms.ComboBox txtDuration;
         private System.Windows.Forms.RichTextBox txtAddress;

@@ -37,7 +37,7 @@ namespace CollageManagementSystem
             con.ConnectionString = "data source = LAPTOP-FPB233T9\\SQLEXPRESS; database =college;integrated security=True";
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-            cmd.CommandText = "insert into teacher (fname,gender,dob,mobile,email,semester,prog,yer,adr) values ('"+txtFname.Text+"','"+gender+"','"+dateTimePickerDOB.Text+"','"+txtMobile.Text+"','"+txtEmail.Text+"','"+txtSemester.Text+"','"+txtProgramming.Text+"','"+txtDuration.Text+"','"+txtAddress.Text+"')";
+            cmd.CommandText = "insert into teacher (fname,gender,dob,mobile,email,year,prog,yer,adr) values ('"+txtFname.Text+"','"+gender+"','"+dateTimePickerDOB.Text+"','"+txtMobile.Text+"','"+txtEmail.Text+"','"+txtSemester.Text+"','"+txtProgramming.Text+"','"+txtDuration.Text+"','"+txtAddress.Text+"')";
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);

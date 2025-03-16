@@ -132,15 +132,15 @@
             this.label7.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(506, 129);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(87, 24);
+            this.label7.Size = new System.Drawing.Size(45, 24);
             this.label7.TabIndex = 7;
-            this.label7.Text = "Semester";
+            this.label7.Text = "Year";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(506, 191);
+            this.label8.Location = new System.Drawing.Point(497, 198);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(122, 24);
             this.label8.TabIndex = 8;
@@ -221,14 +221,9 @@
             // 
             this.txtSemester.FormattingEnabled = true;
             this.txtSemester.Items.AddRange(new object[] {
-            "1st Sem",
-            "2nd Sem",
-            "3rd Sem",
-            "4th Sem",
-            "5th Sem",
-            "6th Sem",
-            "7th Sem",
-            "8th Sem"});
+            "1st Year",
+            "2nd Year ",
+            "3rd Year"});
             this.txtSemester.Location = new System.Drawing.Point(654, 129);
             this.txtSemester.Name = "txtSemester";
             this.txtSemester.Size = new System.Drawing.Size(279, 29);
@@ -256,8 +251,9 @@
             // 
             this.txtDuration.FormattingEnabled = true;
             this.txtDuration.Items.AddRange(new object[] {
-            "2020-2024",
-            "2024-2025"});
+            "2024-2025",
+            "2025-2026",
+            "2026-2027"});
             this.txtDuration.Location = new System.Drawing.Point(654, 262);
             this.txtDuration.Name = "txtDuration";
             this.txtDuration.Size = new System.Drawing.Size(279, 29);

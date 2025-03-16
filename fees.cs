@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CollageManagementSystem
@@ -20,96 +14,108 @@ namespace CollageManagementSystem
 
         private void txtRegNumber_TextChanged(object sender, EventArgs e)
         {
-
-            if (txtRegNumber.Text != "")
-            { 
-
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = "data source = LAPTOP-FPB233T9\\SQLEXPRESS;database = college;integrated security=True";
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = con;
-
-            cmd.CommandText = "select fname,mname,duration from NewAdmission where NAID = "+txtRegNumber.Text+"";
-            SqlDataAdapter DA = new SqlDataAdapter(cmd);
-            DataSet DS = new DataSet();
-            DA.Fill(DS);
-
-                if (DS.Tables[0].Rows.Count != 0)
-                {
-                    fnameLabel.Text = DS.Tables[0].Rows[0][0].ToString();
-                    MnameLabel.Text = DS.Tables[0].Rows[0][1].ToString();
-                    DurationLabel.Text = DS.Tables[0].Rows[0][2].ToString();
-                }
-                else
-                {
-                    fnameLabel.Text = "_______";
-                    MnameLabel.Text = "_______";
-                    DurationLabel.Text = "_______";
-                }
-            }
-            else
+            if (string.IsNullOrWhiteSpace(txtRegNumber.Text))
             {
-                txtRegNumber.Text = "";
-                txtRegNumber.Text = "";
-                fnameLabel.Text = "_______";
-                MnameLabel.Text = "_______";
-                DurationLabel.Text = "_______";
+                ResetFields();
+                return;
             }
-            
+
+            // Validate input (ensure it's a number)
+            if (!IsNumeric(txtRegNumber.Text))
+            {
+                MessageBox.Show("Registration Number must be numeric!", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtRegNumber.Clear(); // Clears input ONLY if it's invalid
+                return;
+            }
+
+            using (SqlConnection con = new SqlConnection("data source=LAPTOP-FPB233T9\\SQLEXPRESS;database=college;integrated security=True"))
+            {
+                con.Open();
+                string query = "SELECT fname, mname, duration FROM NewAdmission WHERE NAID = @NAID";
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@NAID", txtRegNumber.Text);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        fnameLabel.Text = reader["fname"].ToString();
+                        MnameLabel.Text = reader["mname"].ToString();
+                        DurationLabel.Text = reader["duration"].ToString();
+                    }
+                    else
+                    {
+                        ResetFields();
+                    }
+                }
+            }
         }
+
+
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = "data source = LAPTOP-FPB233T9\\SQLEXPRESS;database = college;integrated security=True";
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = con;
-
-            cmd.CommandText = "select * from fees where NAID = " + txtRegNumber.Text + "";
-            SqlDataAdapter DA = new SqlDataAdapter(cmd);
-            DataSet DS = new DataSet();
-            DA.Fill(DS);
-
-
-            if(DS.Tables[0].Rows.Count == 0)
+            if (string.IsNullOrWhiteSpace(txtRegNumber.Text) || string.IsNullOrWhiteSpace(txtFees.Text))
             {
-                MessageBox.Show("Fees Already Submitted", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else
-            {
-                MessageBox.Show("Fees Submitted", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Please enter Registration Number and Fees!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            SqlConnection con1 = new SqlConnection();
-            con1.ConnectionString = "data source = LAPTOP-FPB233T9\\SQLEXPRESS;database = college;integrated security=True";
-            SqlCommand cmd1 = new SqlCommand();
-            cmd1.Connection = con1;
-
-            cmd.CommandText = "insert into fees (NAID,fees) values ("+txtRegNumber.Text+","+txtFees.Text+")";
-            SqlDataAdapter DA1 = new SqlDataAdapter(cmd1);
-            DataSet DS1 = new DataSet();
-            DA1.Fill(DS1);
-
-            if(MessageBox.Show("Fees Submitted Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Asterisk) == DialogResult.OK)
+            using (SqlConnection con = new SqlConnection("data source=LAPTOP-FPB233T9\\SQLEXPRESS;database=college;integrated security=True"))
             {
-                txtRegNumber.Text = "";
-                txtFees.Text = "";
-                fnameLabel.Text = "_______";
-                MnameLabel.Text = "_______";
-                DurationLabel.Text = "_______";
+                con.Open();
+
+                // Check if fees already exist
+                string checkQuery = "SELECT COUNT(*) FROM fees WHERE NAID = @NAID";
+                SqlCommand checkCmd = new SqlCommand(checkQuery, con);
+                checkCmd.Parameters.AddWithValue("@NAID", txtRegNumber.Text);
+
+                int existingRecords = (int)checkCmd.ExecuteScalar();
+                if (existingRecords > 0)
+                {
+                    MessageBox.Show("Fees Already Submitted", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Insert fees record
+                string insertQuery = @"
+                    INSERT INTO fees (NAID, fees, FullName, MotherName) 
+                    SELECT @NAID, @fees, fname, mname FROM NewAdmission WHERE NAID = @NAID";
+
+                SqlCommand insertCmd = new SqlCommand(insertQuery, con);
+                insertCmd.Parameters.AddWithValue("@NAID", txtRegNumber.Text);
+                insertCmd.Parameters.AddWithValue("@fees", txtFees.Text);
+                insertCmd.ExecuteNonQuery();
             }
-            else
+
+            MessageBox.Show("Fees Submitted Successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ResetFields();
+        }
+
+        private void ResetFields()
+        {
+           // txtRegNumber.Text = "";
+           fnameLabel.Text = "_______";
+            txtFees.Text = "";
+            fnameLabel.Text = "_______";
+            MnameLabel.Text = "_______";
+            DurationLabel.Text = "_______";
+        }
+
+        private void txtRegNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                MessageBox.Show("Fees is AllReady Submitted.");
-                txtRegNumber.Text = "";
-                txtFees.Text = "";
-                fnameLabel.Text = "_______";
-                MnameLabel.Text = "_______";
-                DurationLabel.Text = "_______";
+                e.Handled = true; // Prevents typing letters
+                MessageBox.Show("Only numbers are allowed!", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+
+        private bool IsNumeric(string input)
+        {
+            return int.TryParse(input, out _); // Returns true if input is a valid number
+        }
+
     }
 }

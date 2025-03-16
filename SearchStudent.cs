@@ -25,7 +25,7 @@ namespace CollageManagementSystem
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
 
-            cmd.CommandText = "select NewAdmission.NAID as Student_ID,NewAdmission.fname as Full_Name,NewAdmission.mname as Mother_Name,NewAdmission.gender as Gender,NewAdmission.dob as Date_Of_Birth,NewAdmission.mobile as Mobile,NewAdmission.email as Email_ID,NewAdmission.semester,NewAdmission.prog as Programming_Language,NewAdmission.sname as School_Name,NewAdmission.duration as Course_Duration,NewAdmission.addres as Address,fees.fees as Fees from NewAdmission inner join fees on NewAdmission.NAID=fees.NAID";
+            cmd.CommandText = "select NewAdmission.NAID as Student_ID, NewAdmission.fname as Full_Name, NewAdmission.mname as Mother_Name, NewAdmission.gender as Gender, NewAdmission.dob as Date_Of_Birth, NewAdmission.mobile as Mobile, NewAdmission.email as Email_ID,NewAdmission.[year] AS Year, NewAdmission.sname as School_Name, NewAdmission.duration as Course_Duration, NewAdmission.addres as Address, fees.fees as Fees from NewAdmission inner join fees on NewAdmission.NAID=fees.NAID";
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);
